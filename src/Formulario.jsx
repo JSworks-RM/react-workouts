@@ -14,11 +14,13 @@ class Formulario extends React.Component {
         // El estado es sólo para el componente donde se está declarando. Se podria pasar al hijo pero como una propiedades de ese hijo pero no como estado.
         this.state = {
             nombre: "",
-            correo: ""
+            correo: "",
+            fecha: new Date()
         }
 
         this.cambiarNombre = this.cambiarNombre.bind(this)
         this.cambiarCorreo = this.cambiarCorreo.bind(this)
+        //this.cambiarFecha = this.cambiarFecha.bind(this)
 
     }
 
@@ -37,14 +39,21 @@ class Formulario extends React.Component {
                 correo: e.target.value
             })
         }
+
+        cambiarFecha () {
+            this.setState({
+                fecha: new Date()
+            })
+        }
     
 
     // Método render() es obligatorio. Render() retorna el contenido del componente. En este caso retornamos un elemento JSX
     render () {
         return (
             <div className="ed-grid">
-    <h1>Formulario {this.props.name}</h1>
-                <form>
+                <h1>Formulario {this.props.name}</h1>
+                <h4>Fecha: { Math.ceil(this.state.fecha / 1000) }</h4>
+                <form id="elemento">
                     <div className="ed-grid m-grid-2">
                         <div className="from__item">
                             <label>Nombre completo</label>
@@ -65,6 +74,24 @@ class Formulario extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    componentDidMount () {
+        let elemento = document.getElementById('elemento')
+        console.log(elemento)
+
+        this.intervalFecha = setInterval( () => {
+            this.cambiarFecha()
+            console.log(new Date())
+        }, 1000)
+    }
+
+    componentDidUpdate (prevProps, prepState) {
+        //console.log(prepState)
+    }
+
+    componentWillUnmount () {
+        clearInterval (this.intervalFecha)
     }
 
 }
