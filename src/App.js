@@ -2,6 +2,36 @@ import React from 'react'
 import "./styles/styles.scss"
 import Curso from "./Curso"
 
+const cursos = [
+  {
+    "titulo" : "Laravel desde cero",
+    "image" : "https://drupal.ed.team/sites/default/files/imagenes-cdn-edteam/2018-10/Laravel%20Desde%20Cero.jpg",
+    "price" : 20,
+    "profesor" : "Yesi Days",
+    "avatar" : "https://api.ed.team/files/avatars/77b7035b-3025-408c-aea0-22f6386c428e.jpg"
+  },
+  {
+    "titulo" : "NodeJS desde cero",
+    "image" : "https://res.cloudinary.com/edteam/image/upload/w_400/v1573257385/courses/nodejs.png",
+    "price" : 40,
+    "profesor" : "Camilo Montoya",
+    "avatar" : "https://api.ed.team/files/avatars/ed17fe0c-1dc1-4bf6-b823-7594cc2d465d.jpeg"
+  },
+  {
+    "titulo" : "GIT desde cero 2020",
+    "image" : "https://drupal.ed.team/sites/default/files/styles/16_9_medium/public/imagenes-cdn-edteam/2019-11/git-desde-cero-1.png",
+    "price" : 25,
+    "profesor" : "Beto Quiroga",
+    "avatar" : "https://api.ed.team/files/avatars/38118146-4b4a-4844-8959-157614e04cd1.jpg"
+  },
+  {
+    "titulo" : "React desde cero",
+    "image" : "https://drupal.ed.team/sites/default/files/imagenes-cdn-edteam/2019-04/React%20Rutas%20manejo%20de%20estados%20%281%29.png",
+    "price" : 35,
+    "profesor" : "Beto Quiroga",
+    "avatar" : "https://api.ed.team/files/avatars/38118146-4b4a-4844-8959-157614e04cd1.jpg"
+  }
+]
 
 const App = () => (
   <>
@@ -19,23 +49,10 @@ const App = () => (
   </div>
 
   <div className="ed-grid m-grid-3">
-    <Curso 
-      title="React desde cero con EdTeam" 
-      price= {30}
-      image="https://drupal.ed.team/sites/default/files/imagenes-cdn-edteam/2019-04/React%20Rutas%20manejo%20de%20estados%20%281%29.png" 
-      avatar= "https://api.ed.team/files/avatars/38118146-4b4a-4844-8959-157614e04cd1.jpg"
-      
-    />
-
-    <Curso />
-
-    <Curso 
-      title = "PHP desde cero con EdTeam 2019" 
-      image = "https://drupal.ed.team/sites/default/files/imagenes-cdn-edteam/2018-10/php%20desde%20cero.jpg" 
-      avatar = "https://api.ed.team/files/avatars/77b7035b-3025-408c-aea0-22f6386c428e.jpg"
-      profesor = "Yesy Days"
-      price= {20}
-    />
+      {
+        // Hacemos un map al array cursos y por cada delemento dibujo un curso y le paso las propiedades que necesita ese componente
+        cursos.map( c => <Curso title={c.titulo} image={c.image} profesor={c.profesor} price={c.price} avatar={c.avatar} />)
+      }
   </div>
 
 </>
