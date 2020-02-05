@@ -4,11 +4,13 @@ import "./styles/styles.scss"
 // Components
 import Banner from "./Banner"
 import Formulario from './Formulario'
-import CourseGrid from './CourseGrid';
+import CourseGrid from './CourseGrid'
 import Course from './Course'
 
 // Importando de la librería React Router los componentes "Router y Route"
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom' 
+import MainMenu from './MainMenu'
+
 
 
 
@@ -22,6 +24,7 @@ const App = () => (
   // Con el componente Switch evitamos que se pinte una ruta default en todas las demás rutas.
   // Para pasar un parámetro a una ruta se usa la sintaxis :parametro
   <Router>
+    <MainMenu />
     <Switch>
       <Route path="/" exact component={Banner} />
       <Route path="/cursos/:id" component={Course} />
