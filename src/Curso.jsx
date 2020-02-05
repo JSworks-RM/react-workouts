@@ -1,12 +1,15 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Link } from 'react-router-dom'
 
 
 // Como sabemos que la función esta recibiendo un objeto, podemos asignar las llaves que nos interesen para éste componente
 const Curso = ( { id, title, image, price, profesor, avatar } ) => (
     <article className="card">
         <div className="img-container s-ratio-16-9 s-radius-tr s-radius-tl">
-        <img src={ image } alt={ title } />
+            <Link to={`cursos/${id}`}>
+                <img src={ image } alt={ title } />
+            </Link>
         </div>
         <div className="card__data s-border s-radius-br s-radius-bl s-pxy-2">
         <h3 className="t5 s-mb-2 s-center">
