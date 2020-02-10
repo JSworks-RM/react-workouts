@@ -6,21 +6,21 @@ import React from 'react'
 // Para poder utilizar la clase por conceptos de herencia, la clase debe ser una extensión de React.Componet
 // De esa manera, la clase formulario va a extender todos los atributos y métodos de Component que precisamente declaran las cualidades de un componente como tal
 
-class Formulario extends React.Component {
+class Form extends React.Component {
     // Si no necesitaramos props, no haría falta usar el constructor. En la mayoría de los casos vamos a necesitar props
     constructor (props) {
         super(props)
 
         // El estado es sólo para el componente donde se está declarando. Se podria pasar al hijo pero como una propiedades de ese hijo pero no como estado.
         this.state = {
-            nombre: "",
-            correo: "",
-            fecha: new Date()
+            name: "",
+            email: "",
+            date: new Date()
         }
 
-        this.cambiarNombre = this.cambiarNombre.bind(this)
-        this.cambiarCorreo = this.cambiarCorreo.bind(this)
-        //this.cambiarFecha = this.cambiarFecha.bind(this)
+        this.changeName = this.changeName.bind(this)
+        this.changeEmail = this.changeEmail.bind(this)
+        //this.changeDate = this.changeDate.bind(this)
 
     }
 
@@ -28,21 +28,21 @@ class Formulario extends React.Component {
         // La manera mas práctica de actualizar los datos es llamando a la callback sin ejecutarla directamente en el evento accionado, y creamos el método correspondiente en la clase y muy importante hacer el bind(this) para que pueda tener alcance al método que se va a crear.
         
         // Método que va a cambiar el estado input nombre
-        cambiarNombre (e) {
+        changeName (e) {
             this.setState({
-                nombre: e.target.value
+                name: e.target.value
             })
         }
         
-        cambiarCorreo (e) {
+        changeEmail (e) {
             this.setState({
-                correo: e.target.value
+                email: e.target.value
             })
         }
 
-        cambiarFecha () {
+        changeDate () {
             this.setState({
-                fecha: new Date()
+                date: new Date()
             })
         }
     
@@ -52,36 +52,36 @@ class Formulario extends React.Component {
         return (
             <div className="ed-grid">
                 <h1>Formulario {this.props.name}</h1>
-                <h4>Fecha: { Math.ceil(this.state.fecha / 1000) }</h4>
-                <form id="elemento">
+                <h4>date: { Math.ceil(this.state.date / 1000) }</h4>
+                <form id="form-elemento">
                     <div className="ed-grid m-grid-2">
                         <div className="from__item">
                             <label>Nombre completo</label>
                             <input  type="text" 
-                                    onChange={this.cambiarNombre} />
+                                    onChange={this.changeName} />
                         </div>
                         <div className="from__item">
                             <label>Correo Electrónico</label>
                             <input  type="email"
-                                    onChange={ this.cambiarCorreo} />
+                                    onChange={ this.changeEmail} />
                         </div>
                     </div>
                 </form>
 
                 <div>
-                    <h2>{ `Hola ${this.state.nombre}` }</h2>
-                    <span>{ `Tu correo es: ${this.state.correo}` }</span>
+                    <h2>{ `Hola ${this.state.name}` }</h2>
+                    <span>{ `Tu correo es: ${this.state.email}` }</span>
                 </div>
             </div>
         )
     }
 
     componentDidMount () {
-        let elemento = document.getElementById('elemento')
-        console.log(elemento)
+        let element = document.getElementById('form-elemento')
+        console.log(element)
 
-        this.intervalFecha = setInterval( () => {
-            this.cambiarFecha()
+        this.intervalDate = setInterval( () => {
+            this.changeDate()
             console.log(new Date())
         }, 1000)
     }
@@ -91,9 +91,9 @@ class Formulario extends React.Component {
     }
 
     componentWillUnmount () {
-        clearInterval (this.intervalFecha)
+        clearInterval (this.intervalDate)
     }
 
 }
 
-export default Formulario
+export default Form

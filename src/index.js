@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-/* import './index.css'; */
-import App from './App'; 
+import App from './Components/App'; 
 
 const root = document.getElementById('root')
     // El método createElemet de react nos permite crear un elemento y renderizarlo en pantalla. Este método recibe tres parámetros (el componente a crear, las propiedades que va a tener este componente y recibe todos los hijos que va a tener este componente)
