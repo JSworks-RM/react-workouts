@@ -7,6 +7,7 @@ import CourseGrid from './Organisms/CourseGrid'
 import Course from './Pages/Course'
 import History from './Pages/History'
 import Home from './Pages/Home'
+import Users from './Pages/Users'
 
 // Importando de la librería React Router los componentes "Router y Route"
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom' 
@@ -32,6 +33,7 @@ const App = () => (
       <Route path="/cursos" component={ CourseGrid } />
       <Route path="/historial/:valor" component={ History } />
       <Route path="/historial" component={ History } />      
+      <Route path="/usuarios" component={ Users } />
       <Route path="/formulario" component={ () => <Form name={'Página de contacto'} /> } />
       <Route component={() => (
         <div className="ed-grid">
