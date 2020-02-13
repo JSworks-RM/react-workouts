@@ -1,58 +1,49 @@
-import React from 'react'
+import React, { Component } from 'react'
 import CourseCard from '../Molecules/CurseCard'
+import axios from 'axios'
 
-const curses = [
-    {
-      "id": 1,
-      "titulo": "React desde cero",
-      "image": "https://drupal.ed.team/sites/default/files/imagenes-cdn-edteam/2019-04/React%20desde%20cero%20%281%29.png",
-      "price": 40,
-      "profesor": "Beto Quiroga",
-      "avatar": "https://api.ed.team/files/avatars/38118146-4b4a-4844-8959-157614e04cd1.jpg"
-    },
-    {
-      "id": 2,
-      "titulo": "Drupal desde cero",
-      "image": "https://drupal.ed.team/sites/default/files/styles/medium/public/courses/images/drupal-poster-720_3.jpg?itok=e93ErhMN",
-      "price": 30,
-      "profesor": "Beto Quiroga",
-      "avatar": "https://api.ed.team/files/avatars/38118146-4b4a-4844-8959-157614e04cd1.jpg"
-    }, 
-    {
-      "id": 3,
-      "titulo": "Go desde cero",
-      "image": "https://drupal.ed.team/sites/default/files/styles/medium/public/courses/images/go_0.jpg?itok=k2amLhrN",
-      "price": 50,
-      "profesor": "Alexys Lozada",
-      "avatar": "https://api.ed.team/files/avatars/747dea4d-4438-4a7e-904a-427a5cd6aac7.jpg"
-    }, 
-    {
-      "id": 4,
-      "titulo": "HTML desde cero",
-      "image": "https://drupal.ed.team/sites/default/files/styles/medium/public/courses/images/HTML-2018.jpg?itok=Gyvm-W9t",
-      "price": 10,
-      "profesor": "Alvaro Felipe",
-      "avatar": "https://api.ed.team/files/avatars/18a0441b-8357-488f-a461-21d07260f46a.jpg"
+// Como hemos creado una API Rest de la data de cursos. Ahora la vamos a consumir desde el servidor
+// Lo primero es que debemos cambiar la representación del componente de funcion a clase para poder trabajar con state y los ciclos de vida del componente
+// Pero para eso tenemos la solución con la ayuda de los hooks de react que veremos mas adelante como hacerlo
+
+class CourseGrid extends Component {
+    constructor (props) {
+      super(props)
+      this.state = {
+        courses : []
+      }
     }
-  ]
 
-const CourseGrid = () => (
-    <div className="ed-grid m-grid-4">
-        {
-            curses.map(c => (
-                <CourseCard
-                    key = {c.id}
-                    id = {c.id}
-                    title = {c.titulo}
-                    image = {c.image}
-                    price = {c.price}
-                    professor = {c.professor}
-                    avatar = {c.avatar}
-                />
-            ))
-        }
-    </div>
-)
+    componentDidMount () {
+      axios.get('http://my-json-server.typicode.com/joseignaciorm/json-db/cursos')
+        .then(res => {
+          this.setState({
+            courses : res.data
+          })
+        })
+    }
+
+    render () {
+      const { courses } = this.state
+      return (
+        <div className="ed-grid m-grid-4">
+            {
+                courses.map(c => (
+                    <CourseCard
+                        key = {c.id}
+                        id = {c.id}
+                        title = {c.titulo}
+                        image = {c.image}
+                        price = {c.price}
+                        professor = {c.professor}
+                        avatar = {c.avatar}
+                    />
+                ))
+            }
+        </div>
+      )
+    }
+  }
 
 
 export default CourseGrid
