@@ -8,12 +8,12 @@ import Course from './Pages/Course'
 import History from './Pages/History'
 import Home from './Pages/Home'
 import Users from './Pages/Users'
+import Private from './Pages/Private'
+import Public from './Pages/Public'
 
 // Importando de la librería React Router los componentes "Router y Route"
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom' 
 import MainMenu from './Organisms/Header'
-
-
 
 
 const App = () => (
@@ -34,6 +34,8 @@ const App = () => (
       <Route path="/historial/:valor" component={ History } />
       <Route path="/historial" component={ History } />      
       <Route path="/usuarios" component={ Users } />
+      <Route path="/private" component={ Private } />
+      <Route path="/public" component={ Public } />
       <Route path="/formulario" component={ () => <Form name={'Página de contacto'} /> } />
       <Route component={() => (
         <div className="ed-grid">
