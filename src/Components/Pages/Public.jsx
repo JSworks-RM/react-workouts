@@ -5,13 +5,15 @@ import CircleFiles from './CircleFiles'
 
 const Public = (props) => (
     <>
-        <div className="">
-            {console.log(props)}
-            <h1>{props.loggued ? "Página publica" : "No hay login" }</h1>
-        </div>
-        <div className="imgLoaders">
-                <SquareFiles />
-                <CircleFiles />
+        <div className="ed-grid">
+            <div className="">
+                {console.log(props)}
+                <h1>{props.loggued ? "Página publica" : "No hay login" }</h1>
+            </div>
+            <div className="imgLoaders">
+                    <SquareFiles />
+                    <CircleFiles />
+            </div>
         </div>
     </>
 )
