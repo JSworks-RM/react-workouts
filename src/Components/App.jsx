@@ -11,6 +11,7 @@ import Users from './Pages/Users'
 import Private from './Pages/Private'
 import Public from './Pages/Public'
 import Squarefiles from './Pages/SquareFiles'
+import UsersFetch from './Pages/UsersFetch'
 
 // Importando de la librería React Router los componentes "Router y Route"
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom' 
@@ -37,6 +38,7 @@ const App = () => (
       <Route path="/usuarios" component={ Users } />
       <Route path="/private" component={ Private } />
       <Route path="/public" component={ Public } />
+      <Route path="/users" component={ UsersFetch } />
       <Route path="/squarefiles" component={ Squarefiles } />
       <Route path="/formulario" component={ () => <Form name={'Página de contacto'} /> } />
       <Route component={() => (
