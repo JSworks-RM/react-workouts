@@ -1,9 +1,14 @@
 import React from 'react'
 import "../styles/styles.scss"
 import AppRoutes from './AppRoutes'
+import { Provider } from 'react-redux' // Provider: Proveedor de un estado global de nuestro store
+import store from '../redux/store'
 
 const App = () => (
-  <AppRoutes />
+  // Componente Provider le pasamos la propiedad store que va a recibir el store que hemos importado
+  <Provider store={store}>
+    <AppRoutes />
+  </Provider>
 )
 
 export default App;
