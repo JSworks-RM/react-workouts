@@ -36,7 +36,7 @@ const CourseCard = ( { id, title, image, price, professor, avatar, addCourseToCa
                         className="button--ghost-alert button--tiny"
                         onClick={() => removeCourseFromCart(id) }
                         >
-                        Remove To Cart</button>
+                        Remove From Cart</button>
                     :
                         <button 
                         className="button--ghost-alert button--tiny"

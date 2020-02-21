@@ -1,33 +1,16 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React from 'react'
 import CourseGrid from '../Organisms/CourseGrid'
+import { connect } from 'react-redux'
 
-// Como hemos creado una API Rest de la data de cursos. Ahora la vamos a consumir desde el servidor
-// Lo primero es que debemos cambiar la representación del componente de funcion a clase para poder trabajar con state y los ciclos de vida del componente
-// Pero para eso tenemos la solución con la ayuda de los hooks de react que veremos mas adelante como hacerlo
+// Refactorizando ccódigo. Componente de clases lo pasamos a componente presentasional
+// Componente Courses debemos pasarle la propiedad Courses desde el estado global con mapStateToProps del metodo connect()
 
-class Courses extends Component {
-    constructor (props) {
-      super(props)
-      this.state = {
-        courses : []
-      }
-    }
+const Courses = ({ courses }) => <CourseGrid courses = {courses} /> 
 
-    componentDidMount () {
-      axios.get('http://my-json-server.typicode.com/joseignaciorm/json-db/cursos')
-        .then(res => {
-          this.setState({
-            courses : res.data
-          })
-        })
-    }
+// Declarando mapStateToProps. Va a recibir el estado global y devolvemos un objeto
+const mapStateToProps = state => ({
+  courses: state.courses
+})
 
-    render () {
-      const { courses } = this.state
-      return <CourseGrid courses = {courses} /> 
-    }
-  }
-
-
-export default Courses
+// Conectamos Componente Courses con el store
+export default connect(mapStateToProps, {})(Courses)

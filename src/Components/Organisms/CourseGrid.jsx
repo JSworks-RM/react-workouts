@@ -1,6 +1,5 @@
 import React from 'react'
 import CourseCard from '../Molecules/CourseCard'
-import withLoader from '../HOC/withLoader'
 
 const CourseGrid = ( { courses } ) => (
      
@@ -23,5 +22,5 @@ const CourseGrid = ( { courses } ) => (
 )
 
 
-//export default withLoader ("courses", CourseGrid) // Pasamos llave y componente de esta manera
-export default withLoader ("courses")(CourseGrid) // Pasamos los atributos, las props, y seguido pasamos el componente
+//Hemos desactivado, quitado el HOC withLoader que ya no necesitamos para cargar cursos desde el estado global
+export default CourseGrid
