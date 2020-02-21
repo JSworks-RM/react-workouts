@@ -1,12 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from 'react-router-dom'
-import { addToCard } from "../../redux/actionCreators"
+import { addToCart, removeFromCart } from "../../redux/actionCreators"
 import { connect } from 'react-redux'
 
 
 // Como sabemos que la función esta recibiendo un objeto, podemos asignar las llaves que nos interesen para éste componente
-const CourseCard = ( { id, title, image, price, professor, avatar, addCourseToCard, cart } ) => (
+const CourseCard = ( { id, title, image, price, professor, avatar, addCourseToCart, cart, removeCourseFromCart } ) => (
     <article className="card">
         <div className="img-container s-ratio-16-9 s-radius-tr s-radius-tl">
             <Link to={`cursos/${id}`}>
@@ -29,16 +29,22 @@ const CourseCard = ( { id, title, image, price, professor, avatar, addCourseToCa
             </div>
             <div className="s-main-center s-mb-2">
                 <span className="button--ghost-alert button--tiny s-mr-2">{ `$ ${ price }` }</span>
-                <button 
-                    className="button--ghost-alert button--tiny"
-                    onClick={() => addCourseToCard(id)}
-                >
-                    {
-                        cart.find( a => a === id )
-                        ? "Added To cart"
-                        : "Add To Cart"
-                    }
-                </button>
+                { 
+                    cart.find( a => a === id ) 
+                    ?
+                        <button
+                        className="button--ghost-alert button--tiny"
+                        onClick={() => removeCourseFromCart(id) }
+                        >
+                        Remove To Cart</button>
+                    :
+                        <button 
+                        className="button--ghost-alert button--tiny"
+                        onClick={() => addCourseToCart(id) }
+                        >
+                        Add To Cart
+                        </button>
+                }
             </div>
         </div>
     </article>
@@ -82,8 +88,12 @@ const mapStateToProps = state => ({
 // de otra manera no podríamos usar esta función para trabajar con los estados globales.
 // Con esto ya estamos despachando a nuestra acción, y nuestra acción es ADD_TO_CART
 const mapDispatchToProps = dispatch => ({
-    addCourseToCard (id) {
-        dispatch( addToCard(id) )
+    addCourseToCart (id) {
+        dispatch( addToCart(id) )
+    },
+
+    removeCourseFromCart (id) {
+        dispatch ( removeFromCart(id) )
     }
 })
 

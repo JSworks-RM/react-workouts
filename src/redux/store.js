@@ -1,5 +1,5 @@
 import { createStore } from 'redux' // Importamos método createStore de librería redux
-import { ADD_TO_CART } from './actions'
+import { ADD_TO_CART, REMOVE_FROM_CART } from './actions'
 
 // Creamos el reducer que es el que va a hacer los cambios en el store
 // Reducer para poder manejar el estado recibo el estado inicial y recibe la acción que debe ejecutar para modificar el estado
@@ -21,6 +21,13 @@ const rootReducer = ( state = initialStore, { type, id } ) => {
         return {
             ...state,
             cart: state.cart.concat(id) 
+        }
+    }
+
+    if ( type === REMOVE_FROM_CART ) {
+        return {
+            ...state,
+            cart: state.cart.filter(c => c !== id) 
         }
     }
 
