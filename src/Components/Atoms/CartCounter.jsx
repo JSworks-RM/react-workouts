@@ -10,7 +10,8 @@ const CartCounter = ( { cartLength } ) => (
 
 const mapStateToProps = state => (
     {
-        cartLength : state.cart // Leyendo las props del estado global y ya estan pasadas al componente que hemos conectado
+        // rootReducer es la nueva llave o propiedad que contiene el array cart al implementar el método combineReducers()
+        cartLength : state.rootReducer.cart // Leyendo las props del estado global y ya estan pasadas al componente que hemos conectado
     }
 )
 

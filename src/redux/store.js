@@ -1,4 +1,4 @@
-import { createStore } from 'redux' // Importamos método createStore de librería redux
+import { createStore, combineReducers } from 'redux' // Importamos método createStore de librería redux
 import { ADD_TO_CART, REMOVE_FROM_CART } from './actions'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
@@ -42,8 +42,13 @@ const cursos = [
         }
       ]
 
+// Valor del estado inicial del rootReducer
 const initialStore = {
-    cart: [],
+    cart: []
+}
+
+// Valor del estado inicial del coursesReducer
+const initialCourses = {
     courses: cursos
 }
 
@@ -71,5 +76,10 @@ const rootReducer = ( state = initialStore, { type, id } ) => {
     return state
 }
 
+// Creamos un nuevo empleado reducerxº
+const coursesReducer = ( state = initialCourses, action ) => {
+    return state
+}
+
 // Exportamos la función createStore() que importamos de redux y le pasamos al reducer
-export default createStore(rootReducer, composeWithDevTools())
+export default createStore(combineReducers({ rootReducer, coursesReducer }), composeWithDevTools())

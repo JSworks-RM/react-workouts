@@ -8,8 +8,9 @@ import { connect } from 'react-redux'
 const Courses = ({ courses }) => <CourseGrid courses = {courses} /> 
 
 // Declarando mapStateToProps. Va a recibir el estado global y devolvemos un objeto
+// coursesReducer es la nueva llave o propiedad que contiene el array courses al implementar el método combineReducers()
 const mapStateToProps = state => ({
-  courses: state.courses
+  courses: state.coursesReducer.courses
 })
 
 // Conectamos Componente Courses con el store

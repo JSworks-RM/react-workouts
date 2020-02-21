@@ -77,7 +77,8 @@ CourseCard.defaultProps = {
 // Enviamos un objeto vacío debido a que no necesitamos un mapStateToProps
 const mapStateToProps = state => ({
     // Leémos el estado global y ya podemos disponer del array de objeto de este estado global en nuestro componente CourseCard
-    cart: state.cart 
+    // rootReducer es la nueva llave o propiedad que contiene el array cart al implementar el método combineReducers()
+    cart: state.rootReducer.cart 
 }) 
 
 // mapDispatchToProps recibe un dispatch como callback con el que vamos a generar otro objeto 
