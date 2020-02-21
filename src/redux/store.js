@@ -10,6 +10,7 @@ const initialStore = {
 }
 
 const rootReducer = ( state = initialStore, action ) => {
+    console.log(action)
     return state
 }
 

@@ -1,10 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from 'react-router-dom'
+import { addToCard } from "../../redux/actionCreators"
+import { connect } from 'react-redux'
 
 
 // Como sabemos que la función esta recibiendo un objeto, podemos asignar las llaves que nos interesen para éste componente
-const CourseCard = ( { id, title, image, price, professor, avatar } ) => (
+const CourseCard = ( { id, title, image, price, professor, avatar, addCourseToCard } ) => (
     <article className="card">
         <div className="img-container s-ratio-16-9 s-radius-tr s-radius-tl">
             <Link to={`cursos/${id}`}>
@@ -25,13 +27,18 @@ const CourseCard = ( { id, title, image, price, professor, avatar } ) => (
                     <span className="small">{professor}</span>
                 </div>
             </div>
-            <div className="s-main-center">
-                <a className="button--ghost-alert button--tiny" href="/">{ `$ ${ price }` }</a>
+            <div className="s-main-center s-mb-2">
+                <span className="button--ghost-alert button--tiny s-mr-2">{ `$ ${ price }` }</span>
+                <button 
+                    className="button--ghost-alert button--tiny"
+                    onClick={() => addCourseToCard(id)}
+                >
+                    Add To Cart
+                </button>
             </div>
         </div>
     </article>
 )
-
 
 // A Curso le indicamos que defina las propiedades del PropType que va a ser un objeto.
 // En el objeto debemos indicar que tipo de dato nos va a llegar
@@ -52,4 +59,25 @@ CourseCard.defaultProps = {
     avatar: ""
 }
 
-export default CourseCard
+
+// Creamos la función addCourseToCard que va a ejecutar un dispatch.
+// Para que funcione la función y pueda tener alcance a las props globales del store hay que conectar nuestro componente al store
+// El método dispatch() va a hacer la llamada a la acción que queremos ejecutar y que hemos creado en el actionCreators().
+
+// Enviamos un objeto vacío debido a que no necesitamos un mapStateToProps
+const mapStateToProps = state => ({}) 
+
+// mapDispatchToProps recibe un dispatch como callback con el que vamos a generar otro objeto 
+// y en este caso el primer atributo o valor de nuestro objeto va a ser nuestra función addCourseToCard
+// Ahora que mapDispatchToProps ha convertido en propiedades a la función pasada como atributo del objeto de la función dispatch,
+// Significa que tenemos que acceder a la función addCourseToCard por medio de las propiedades del componente, 
+// entonces de esa manera es que recibimos esa función para poder usarla en nuestro componente que ya esta conectado al store.
+// de otra manera no podríamos usar esta función para trabajar con los estados globales.
+// Con esto ya estamos despachando a nuestra acción, y nuestra acción es ADD_TO_CART
+const mapDispatchToProps = dispatch => ({
+    addCourseToCard (id) {
+        dispatch( addToCard(id) )
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CourseCard)

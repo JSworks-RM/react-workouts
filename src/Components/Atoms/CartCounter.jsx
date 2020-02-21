@@ -14,9 +14,7 @@ const mapStateToProps = state => (
     }
 )
 
-const mapDispatchToProps = () => {
-
-}
+const mapDispatchToProps = dispatch => ({})
 
 
 // El método connect() recibe dos propiedades
