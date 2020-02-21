@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 
 // Como sabemos que la función esta recibiendo un objeto, podemos asignar las llaves que nos interesen para éste componente
-const CourseCard = ( { id, title, image, price, professor, avatar, addCourseToCard } ) => (
+const CourseCard = ( { id, title, image, price, professor, avatar, addCourseToCard, cart } ) => (
     <article className="card">
         <div className="img-container s-ratio-16-9 s-radius-tr s-radius-tl">
             <Link to={`cursos/${id}`}>
@@ -33,7 +33,11 @@ const CourseCard = ( { id, title, image, price, professor, avatar, addCourseToCa
                     className="button--ghost-alert button--tiny"
                     onClick={() => addCourseToCard(id)}
                 >
-                    Add To Cart
+                    {
+                        cart.find( a => a === id )
+                        ? "Added To cart"
+                        : "Add To Cart"
+                    }
                 </button>
             </div>
         </div>
@@ -65,7 +69,10 @@ CourseCard.defaultProps = {
 // El método dispatch() va a hacer la llamada a la acción que queremos ejecutar y que hemos creado en el actionCreators().
 
 // Enviamos un objeto vacío debido a que no necesitamos un mapStateToProps
-const mapStateToProps = state => ({}) 
+const mapStateToProps = state => ({
+    // Leémos el estado global y ya podemos disponer del array de objeto de este estado global en nuestro componente CourseCard
+    cart: state.cart 
+}) 
 
 // mapDispatchToProps recibe un dispatch como callback con el que vamos a generar otro objeto 
 // y en este caso el primer atributo o valor de nuestro objeto va a ser nuestra función addCourseToCard
