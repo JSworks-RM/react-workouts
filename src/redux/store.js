@@ -6,7 +6,7 @@ import { createStore } from 'redux' // Importamos método createStore de librer�
 // Como la primera vez que cargue el estado no va a existir, para que no devuelva undefined le indicaremos que su estado va a ser igual a un estado inicial
 // Para saber que es inicialStore debemos declararlo, sino igual sería un undefined
 const initialStore = {
-    cart: ["a", "b"]
+    cart: []
 }
 
 const rootReducer = ( state = initialStore, action ) => {
