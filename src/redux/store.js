@@ -1,4 +1,5 @@
 import { createStore } from 'redux' // Importamos método createStore de librería redux
+import { ADD_TO_CART } from './actions'
 
 // Creamos el reducer que es el que va a hacer los cambios en el store
 // Reducer para poder manejar el estado recibo el estado inicial y recibe la acción que debe ejecutar para modificar el estado
@@ -9,8 +10,18 @@ const initialStore = {
     cart: []
 }
 
+// Validamos el typo de action y retornamos el nuevo objeto que va a tener todas las llaves del estado para no modificar accidentalmente nada que ya este en el estado
+// Y al estado anterior le concatenamos un nuevo elemento que es lo que venga en el action
+// Importante: por teoria generalde JavaScript y como un principio de react que es la inmutabilidad de los objetos: nosotros no podemos directamente modificar lo que esta en el estado, sino que tenemos que darle nuevos valores
+// Por eso es que usaremos el tipo de funciones como concat, filter, map, reduce, etc...
 const rootReducer = ( state = initialStore, action ) => {
-    console.log(action)
+    if ( action.type === ADD_TO_CART ) {
+        return {
+            ...state,
+            cart: state.cart.concat(action.id) 
+        }
+    }
+
     return state
 }
 
