@@ -3,8 +3,13 @@ import "../styles/styles.scss"
 import AppRoutes from './AppRoutes'
 import { Provider } from 'react-redux' // Provider: Proveedor de un estado global de nuestro store
 import store from '../redux/store'
+import { getCourseList } from '../redux/actionCreators'
+
+// Despachamos nuestra lista de cursos desde la petición a nuestro servidor
+store.dispatch(getCourseList())
 
 const App = () => (
+
   // Componente Provider le pasamos la propiedad store que va a recibir el store que hemos importado
   <Provider store={store}>
     <AppRoutes />
