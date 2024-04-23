@@ -9,6 +9,8 @@ import Footer from "./components/Footer"
 import About from "./components/About"
 import Terms from "./components/Terms"
 import CreatePost from "./components/CreatePost"
+import ViewSinglePost from "./components/ViewSinglePost"
+import FlashMessages from "./components/FlashMessages"
 
 import Axios from "axios"
 
@@ -16,12 +18,20 @@ Axios.defaults.baseURL = "http://localhost:8080"
 
 function Main() {
   const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem("complexappToken")))
+  const [flashMessages, setFlashMessages] = useState([])
+
+  function addFlashMessages(msn) {
+    setFlashMessages(prev => prev.concat(msn))
+  }
+
   return (
     <BrowserRouter>
+      <FlashMessages messages={flashMessages} />
       <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Routes>
         <Route path="/" element={loggedIn ? <Home /> : <HomeGuest />} />
-        <Route path="/create-post" element={<CreatePost />} />
+        <Route path="/post/:id" element={<ViewSinglePost />} />
+        <Route path="/create-post" element={<CreatePost addFlashMessages={addFlashMessages} />} />
         <Route path="/about-us" element={<About />} />
         <Route path="/terms" element={<Terms />} />
       </Routes>
