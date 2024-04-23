@@ -10,7 +10,7 @@ function HomeGuest() {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-      await Axios.post("http://127.0.0.1:8080/register", { username, email, password })
+      await Axios.post("/register", { username, email, password })
       console.log("You have been registered successfully!")
     } catch (e) {
       console.log(`An error ocurred. ${e}`)
