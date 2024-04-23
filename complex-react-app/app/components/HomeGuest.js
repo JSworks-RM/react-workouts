@@ -1,17 +1,16 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import Page from "./Page"
 import Axios from "axios"
 
-
-function HomeGuest () {
+function HomeGuest() {
   const [username, setUsername] = useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     try {
-      Axios.post("http://127.0.0.1:8080/register", {username, email, password})
+      await Axios.post("http://127.0.0.1:8080/register", { username, email, password })
       console.log("You have been registered successfully!")
     } catch (e) {
       console.log(`An error ocurred. ${e}`)
