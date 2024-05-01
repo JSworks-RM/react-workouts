@@ -18,7 +18,6 @@ import ViewSinglePost from "./components/ViewSinglePost"
 import FlashMessages from "./components/FlashMessages"
 
 import Axios from "axios"
-
 Axios.defaults.baseURL = "http://localhost:8080"
 
 function Main() {
@@ -28,7 +27,7 @@ function Main() {
     user: {
       token: localStorage.getItem("complexappToken"),
       username: localStorage.getItem("complexappUsername"),
-      avatar: localStorage.setItem("complexappAvatar")
+      avatar: localStorage.getItem("complexappAvatar")
     }
   }
 
@@ -36,6 +35,7 @@ function Main() {
     switch (action.type) {
       case "login":
         draft.loggedIn = true
+        draft.user = action.data
         return
       case "logout":
         draft.loggedIn = false
